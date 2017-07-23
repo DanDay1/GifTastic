@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>GifTastic</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="assets/javascript/main.js"></script>
+</head>
+
+<body>
+                    <img src="https://media4.giphy.com/media/y8aIDLtACYjNm/200.gif">
+
+
+    <div class="container">
+        <h1>New England Sports</h1>
+        <!-- Movies will Get Dumped Dere -->
+        <div id="topics-view"></div>
+        <!-- Rendered Buttons will get Dumped Here  -->
+        <div id="buttons-view"></div>
+        <form id="team-form">
+            <label for="team-input">Add a Team Dude</label>
+            <input type="text" id="team-input">
+            <br>
+            <!-- Button triggers new movie to be added -->
+            <input id="add-team" type="submit" value="Add a Team Dude">
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        var topics = ["Red Sox", "Patriots", "Bruins", "Celtics", "Revolution"];
+
+        function displayTeamInfo() {
+
+            console.log("displayTeamInfo");
+            var topic = $(this).attr("data-name");
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&rating&limit5&apikey=4121b0e2b9e84569b1f2d4c63149eaf6";
+
+            //             var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + topic + "&g=&api_key=40e9cece=5");
+            // xhr.done(function(data) { console.log("success got data", data); });
+
+            // Creating an AJAX call for the specific movie button being clicked
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).done(function(response) {
+                console.log(response);
+                console.log(response.data[24].rating);
+
+                var teamDiv = $("<div class='topic'>");
+
+
+
+                // Storing the rating data
+                // var rating = response.Rated;
+
+                // Creating an element to have the rating displayed
+                for (var i = 0; i < 25; i++) {
+
+
+
+                    // Displaying the rating
+                    teamDiv.append(response.data[i].rating);
+
+
+                    $("#topics-view").prepend(teamDiv);
+
+
+                }
+
+            });
+
+        }
+
+        // Function for displaying movie data
+        function renderButtons() {
+            console.log("renderButtons");
+
+            // Deleting the movies prior to adding new movies
+            // (this is necessary otherwise you will have repeat buttons)
+            $("#buttons-view").empty();
+
+            // Looping through the array of movies
+            for (var i = 0; i < topics.length; i++) {
+
+                // Then dynamicaly generating buttons for each movie in the array
+                // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+                var a = $("<button>");
+                // Adding a class of movie to our button
+                a.addClass("topic");
+                // Adding a data-attribute
+                a.attr("data-name", topics[i]);
+                // Providing the initial button text
+                a.text(topics[i]);
+                // Adding the button to the buttons-view div
+                $("#buttons-view").append(a);
+            }
+        }
+
+        // This function handles events where a movie button is clicked
+        $("#add-team").on("click", function(event) {
+            console.log(add - team);
+            event.preventDefault();
+            // This line grabs the input from the textbox
+            var topic = $("#team-input").val().trim();
+
+            // Adding movie from the textbox to our array
+            tropics.push(topic);
+
+            // Calling renderButtons which handles the processing of our movie array
+            renderButtons();
+        });
+
+        // Adding a click event listener to all elements with a class of "movie"
+        $(document).on("click", ".topic", displayTeamInfo);
+
+        // Calling the renderButtons function to display the intial buttons
+        renderButtons();
+        </script>
+    </div>
+</body>
+
+</html>
+</script>
+</body>
+
+</html>
