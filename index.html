@@ -29,7 +29,7 @@
         </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
-        var topics = ["Red Sox", "Patriots", "Bruins", "Celtics", "Revolution"];
+        var topics = ["Red Sox", "Patriots", "Bruins", "Celtics", "New England Revolution"];
 
         function displayTeamInfo() {
 
@@ -46,7 +46,7 @@
                 method: "GET"
             }).done(function(response) {
                 console.log(response);
-                console.log(response.data[24].rating);
+                console.log(response.data[9].rating);
 
                 var teamDiv = $("<div class='topic'>");
 
@@ -56,18 +56,24 @@
                 // var rating = response.Rated;
 
                 // Creating an element to have the rating displayed
-                for (var i = 0; i < 25; i++) {
-
+                for (var i = 0; i < 10; i++) {
+                    console.log(i);
 
 
                     // Displaying the rating
-                    teamDiv.append(response.data[i].rating);
+                    // teamDiv.append(response.data[i].rating);
+                    var teamImage = response.data[i].images.fixed_height.url;
+                    console.log(teamImage);
+                    var displayImage = "<img src= " + teamImage + ">";
+                    teamDiv.append(displayImage);
 
 
-                    $("#topics-view").prepend(teamDiv);
+                    
 
 
                 }
+
+                $("#topics-view").prepend(teamDiv);
 
             });
 
