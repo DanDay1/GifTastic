@@ -35,17 +35,25 @@
 
         function controlGifState() {
 
-            var state = $(this).find("img").attr("data-state");
             console.log("controlGifState");
+            var state = $(this).attr("data-state");
+            console.log(this);
+            
             console.log("state" + state);
+
+
 
             
             if (state === "still") {
-                $(this).find("img").attr("src", $(this).find("img").attr("data-animate"));
-                $(this).find("img").attr("data-state", "animate");
+                console.log("branch 1");
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+                console.log(this);
+
             } else {
-                $(this).find("img").attr("src", $(this).find("img").attr("data-still"));
-                $(this).find("img").attr("data-state", "still");
+                console.log("branch 2");
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
             }
         }
 
@@ -140,13 +148,14 @@
         });
 
       
-        $(document).on("click", ".topic", displayTeamInfo);
+         $(document).on("click", ".topic", displayTeamInfo);
 
         
         renderButtons();
 
         // $(document).on("click", ".displayImage", controlGifState);
-        $(document).on("click", ".teamDiv.displayImage[0]", controlGifState);
+        // $(document).on("click", ".teamDiv.displayImage[0]", controlGifState);
+        $(document).on("click", "img", controlGifState);
         </script>
     </div>
 </body>
