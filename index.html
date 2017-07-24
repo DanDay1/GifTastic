@@ -11,31 +11,50 @@
 </head>
 
 <body>
-                    <img src="https://media4.giphy.com/media/y8aIDLtACYjNm/200.gif">
-
-
+    <img src="https://media4.giphy.com/media/y8aIDLtACYjNm/200.gif">
     <div class="container">
         <h1>New England Sports</h1>
-        <!-- Movies will Get Dumped Dere -->
+        
         <div id="topics-view"></div>
-        <!-- Rendered Buttons will get Dumped Here  -->
+        
         <div id="buttons-view"></div>
         <form id="team-form">
             <label for="team-input">Add a Team Dude</label>
             <input type="text" id="team-input">
             <br>
-            <!-- Button triggers new movie to be added -->
+            
             <input id="add-team" type="submit" value="Add a Team Dude">
         </form>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
         var topics = ["Red Sox", "Patriots", "Bruins", "Celtics", "New England Revolution"];
 
+        var topic;
+
+        function controlGifState() {
+            // The image state will be either "still" or "animated"
+            var state = $(this).find("img").attr("data-state");
+            console.log(state);
+
+            // Make the Gif either animated or still depending on the "data-state" value
+            if (state === "still") {
+                $(this).find("img").attr("src", $(this).find("img").attr("data-animate"));
+                $(this).find("img").attr("data-state", "animate");
+            } else {
+                $(this).find("img").attr("src", $(this).find("img").attr("data-still"));
+                $(this).find("img").attr("data-state", "still");
+            }
+        }
+
         function displayTeamInfo() {
 
             console.log("displayTeamInfo");
-            var topic = $(this).attr("data-name");
-            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&rating&limit5&apikey=4121b0e2b9e84569b1f2d4c63149eaf6";
+
+            topic = $(this).attr("data-name");
+
+            console.log("topic" + topic);
+
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&rating&limit=10&apikey=4121b0e2b9e84569b1f2d4c63149eaf6";
 
             //             var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + topic + "&g=&api_key=40e9cece=5");
             // xhr.done(function(data) { console.log("success got data", data); });
@@ -48,6 +67,8 @@
                 console.log(response);
                 console.log(response.data[9].rating);
 
+
+
                 var teamDiv = $("<div class='topic'>");
 
 
@@ -59,25 +80,43 @@
                 for (var i = 0; i < 10; i++) {
                     console.log(i);
 
+                    //     var dataName = $(this).attr("data-name");
+                    // console.log(dataName);
+
 
                     // Displaying the rating
                     // teamDiv.append(response.data[i].rating);
-                    var teamImage = response.data[i].images.fixed_height.url;
-                    console.log(teamImage);
-                    var displayImage = "<img src= " + teamImage + ">";
+                    // var teamImage = response.data[i].images.fixed_height.url;
+                    // console.log(teamImage);
+                    // var displayImage = "<img src= " + teamImage + ">";
+
+                    var displayImage = $("<img>");
+                    displayImage.attr("src", response.data[i].images.fixed_height_still.url);
+                    displayImage.attr("data-still", response.data[i].images.fixed_height_still.url);
+                    displayImage.attr("data-animate", response.data[i].images.fixed_height.url);
+                    displayImage.attr("data-state", "still");
+                    displayImage.attr("data-name", topic);
                     teamDiv.append(displayImage);
 
 
-                    
 
+                    // Append the new Gifs to the gifPanel
+                    // $("#gifPanel").append(teamDiv);
+
+                    teamDiv.append(displayImage);
 
                 }
 
                 $("#topics-view").prepend(teamDiv);
 
+
+
             });
 
+
         }
+
+
 
         // Function for displaying movie data
         function renderButtons() {
@@ -107,12 +146,14 @@
         // This function handles events where a movie button is clicked
         $("#add-team").on("click", function(event) {
             console.log(add - team);
+            console.log("add - team");
             event.preventDefault();
             // This line grabs the input from the textbox
-            var topic = $("#team-input").val().trim();
+            topic = $("#team-input").val().trim();
 
             // Adding movie from the textbox to our array
-            tropics.push(topic);
+            topics.push(topic);
+            console.log("1topic" + topic);
 
             // Calling renderButtons which handles the processing of our movie array
             renderButtons();
@@ -123,6 +164,8 @@
 
         // Calling the renderButtons function to display the intial buttons
         renderButtons();
+
+        $(document).on("click", ".displayImage", controlGifState);
         </script>
     </div>
 </body>
