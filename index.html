@@ -31,6 +31,8 @@
 
         var topic;
 
+        var teamDiv;
+
         // $(this).click(function(controlGifState));
 
         function controlGifState() {
@@ -57,7 +59,10 @@
             }
         }
 
+
         function displayTeamInfo() {
+
+
 
             console.log("displayTeamInfo");
 
@@ -78,10 +83,18 @@
                 console.log(response);
                 console.log(response.data[9].rating);
 
-                var teamDiv = $("<div class='topic'>");
+                teamDiv = $("<div class='topic'>");
+
+                // $("#teamDiv").empty();
 
                 for (var i = 0; i < 10; i++) {
                     console.log(i);
+
+                    teamDiv.append(response.data[i].rating);
+ 
+ 
+                     $("#topics-view").prepend(teamDiv);
+ 
 
                     //     var dataName = $(this).attr("data-name");
                     // console.log(dataName);
@@ -148,8 +161,8 @@
         });
 
       
-         $(document).on("click", ".topic", displayTeamInfo);
-
+          $(document).on("click", ".topic", displayTeamInfo);
+         
         
         renderButtons();
 
