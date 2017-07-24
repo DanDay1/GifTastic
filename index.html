@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <img src="https://media4.giphy.com/media/y8aIDLtACYjNm/200.gif">
+    <!-- <img src="https://media4.giphy.com/media/y8aIDLtACYjNm/200.gif"> -->
     <div class="container">
         <h1>New England Sports</h1>
         
@@ -31,10 +31,13 @@
 
         var topic;
 
+        // $(this).click(function(controlGifState));
+
         function controlGifState() {
 
             var state = $(this).find("img").attr("data-state");
-            console.log(state);
+            console.log("controlGifState");
+            console.log("state" + state);
 
             
             if (state === "still") {
@@ -142,7 +145,8 @@
         
         renderButtons();
 
-        $(document).on("click", ".displayImage", controlGifState);
+        // $(document).on("click", ".displayImage", controlGifState);
+        $(document).on("click", ".teamDiv.displayImage[0]", controlGifState);
         </script>
     </div>
 </body>
