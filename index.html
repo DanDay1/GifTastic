@@ -119,7 +119,9 @@
 
                     teamDiv.append(displayImage);
 
+
                 }
+                removeAllImages();
 
                 $("#topics-view").prepend(teamDiv);
 
@@ -130,7 +132,7 @@
         function renderButtons() {
             console.log("renderButtons");
 
-            $("#buttons-view").empty();
+            // $("#buttons-view").empty();
 
             for (var i = 0; i < topics.length; i++) {
 
@@ -148,7 +150,6 @@
 
 
         $("#add-team").on("click", function(event) {
-            console.log(add - team);
             console.log("add - team");
             event.preventDefault();
 
@@ -170,6 +171,11 @@
         // $(document).on("click", ".displayImage", controlGifState);
         // $(document).on("click", ".teamDiv.displayImage[0]", controlGifState);
         $(document).on("click", "img", controlGifState);
+
+        function removeAllImages() {
+            $('img').remove;
+            $('p').remove;
+        }
         </script>
     </div>
 </body>
