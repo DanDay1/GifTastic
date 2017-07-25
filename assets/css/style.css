@@ -1,0 +1,30 @@
+body {
+	font-family: helvetica, arial, "New Rail Alphabet", "Galaxie Polaris";
+}
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  clear: both;
+ 
+ }
+
+h1 {
+	padding: 20px;
+ 	font-size: 48px;
+  	color: #D60C0C;
+ 	
+ }
+
+#team-form, #add-team{
+	padding: 20px;
+
+}
+
+ button, #add-team {
+      margin: 10px;
+      font-size: 18px;
+    
+ }
+

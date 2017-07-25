@@ -14,17 +14,18 @@
     <!-- <img src="https://media4.giphy.com/media/y8aIDLtACYjNm/200.gif"> -->
     <div class="container">
         <h1>New England Sports</h1>
-        
-        <div id="topics-view"></div>
-        
         <div id="buttons-view"></div>
+        
         <form id="team-form">
             <label for="team-input">Add a Team Dude</label>
             <input type="text" id="team-input">
             <br>
-            
             <input id="add-team" type="submit" value="Add a Team Dude">
         </form>
+
+        <div id="topics-view"></div>
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
         var topics = ["Red Sox", "Patriots", "Bruins", "Celtics", "New England Revolution"];
@@ -40,12 +41,12 @@
             console.log("controlGifState");
             var state = $(this).attr("data-state");
             console.log(this);
-            
+
             console.log("state" + state);
 
 
 
-            
+
             if (state === "still") {
                 console.log("branch 1");
                 $(this).attr("src", $(this).attr("data-animate"));
@@ -75,7 +76,7 @@
             //             var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + topic + "&g=&api_key=40e9cece=5");
             // xhr.done(function(data) { console.log("success got data", data); });
 
-            
+            $("topics-view").empty();
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -91,10 +92,10 @@
                     console.log(i);
 
                     teamDiv.append(response.data[i].rating);
- 
- 
-                     $("#topics-view").prepend(teamDiv);
- 
+
+
+                    $("#topics-view").prepend(teamDiv);
+
 
                     //     var dataName = $(this).attr("data-name");
                     // console.log(dataName);
@@ -125,22 +126,22 @@
             });
 
         }
-        
+
         function renderButtons() {
             console.log("renderButtons");
-     
+
             $("#buttons-view").empty();
-        
-           for (var i = 0; i < topics.length; i++) {
-                
+
+            for (var i = 0; i < topics.length; i++) {
+
                 var a = $("<button>");
-                
+
                 a.addClass("topic");
-                
+
                 a.attr("data-name", topics[i]);
-                
+
                 a.text(topics[i]);
-              
+
                 $("#buttons-view").append(a);
             }
         }
@@ -150,20 +151,20 @@
             console.log(add - team);
             console.log("add - team");
             event.preventDefault();
-   
+
             topic = $("#team-input").val().trim();
 
-    
+
             topics.push(topic);
             console.log("1topic" + topic);
 
             renderButtons();
         });
 
-      
-          $(document).on("click", ".topic", displayTeamInfo);
-         
-        
+
+        $(document).on("click", ".topic", displayTeamInfo);
+
+
         renderButtons();
 
         // $(document).on("click", ".displayImage", controlGifState);
