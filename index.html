@@ -71,12 +71,12 @@
 
             console.log("topic" + topic);
 
-            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&rating&limit=10&apikey=4121b0e2b9e84569b1f2d4c63149eaf6";
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&rating&limit=10&apikey=4121b0e2b9e84569b1f2d4c63149eaf6";
 
             //             var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + topic + "&g=&api_key=40e9cece=5");
             // xhr.done(function(data) { console.log("success got data", data); });
 
-            $("topics-view").empty();
+            $("#topics-view").empty();
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -159,7 +159,7 @@
             topics.push(topic);
             console.log("1topic" + topic);
 
-            renderButtons();
+            renderNewButton();
         });
 
 
@@ -175,6 +175,15 @@
         function removeAllImages() {
             $('img').remove;
             $('p').remove;
+        }
+
+        function renderNewButton() {
+            var a = $("<button>");
+            a.addClass("topic");
+            a.attr("data-name", topics[topics.length - 1]);
+            a.text(topics[topics.length - 1]);
+
+            $("#buttons-view").append(a);
         }
         </script>
     </div>
